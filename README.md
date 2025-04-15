@@ -78,7 +78,7 @@ For an Ubuntu Distrobox:
 ```
 distrobox create --root --unshare-netns \
     --absolutely-disable-root-password-i-am-really-positively-sure \
-    --name nfqueue-ips --image ubuntu:2404
+    --name nfqueue-ips --image ubuntu:24.04
 ```
 
 Or if you prefer Fedora:
