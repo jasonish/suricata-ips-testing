@@ -1,0 +1,59 @@
+FROM fedora:41
+
+RUN dnf -y update
+
+# Install some basic network tools.
+RUN dnf -y install \
+        curl \
+        iproute \
+        iptables \
+        iputils \
+        tcpdump \
+        telnet
+
+# Install a Suricata development environment.
+RUN dnf -y install \
+        autoconf \
+        automake \
+        bindgen \
+        cargo \
+        cbindgen \
+        ccache \
+        clang \
+        diffutils \
+        file-devel \
+        gcc \
+        gcc-c++ \
+        git \
+        hiredis-devel \
+        jansson-devel \
+        jq \
+        libasan \
+        libtool \
+        libyaml-devel \
+        libnfnetlink-devel \
+        libnetfilter_queue-devel \
+        libnet-devel \
+        libcap-ng-devel \
+        libevent-devel \
+        libmaxminddb-devel \
+        libpcap-devel \
+        libxdp-devel \
+        libbpf-devel \
+        libtool \
+        lz4-devel \
+        make \
+        parallel \
+        pcre2-devel \
+        pkgconfig \
+        python \
+        python3-yaml \
+        sudo \
+        which \
+        zlib-devel
+
+COPY /docker/_ips-entry.sh /_ips-entry.sh
+COPY /docker/_protected-entry.sh /_protected-entry.sh
+
+ARG USERNAME
+RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME}

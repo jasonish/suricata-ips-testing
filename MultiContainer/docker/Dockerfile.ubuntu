@@ -1,0 +1,62 @@
+FROM ubuntu:24.04
+
+RUN apt update && apt -y upgrade
+
+RUN apt -y install \
+        autoconf \
+        automake \
+        build-essential \
+        cargo \
+        cbindgen \
+        clang-18 \
+        curl \
+        dpdk-dev \
+        exuberant-ctags \
+        git \
+        inetutils-ping \
+        iptables \
+        jq \
+        libc++-dev \
+        libc++abi-dev \
+        libcap-ng-dev \
+        libcap-ng0 \
+        libevent-dev \
+        libevent-pthreads-2.1-7 \
+        libhiredis-dev \
+        libjansson-dev \
+        libmagic-dev \
+        libnet1-dev \
+        libnetfilter-queue-dev \
+        libnetfilter-queue1 \
+        libnfnetlink-dev \
+        libnfnetlink0 \
+        libnuma-dev \
+        libpcap-dev \
+        libpcre2-dev \ 
+        libtool \
+        libyaml-0-2 \
+        libyaml-dev \
+        llvm-18-dev \
+        make \
+        parallel \
+        python3-yaml \
+        rustc \
+        software-properties-common \
+        sudo \
+        tcpdump \
+        time \
+        unzip \
+        wget \
+        zlib1g \
+        zlib1g-dev
+
+COPY /docker/_ips-entry.sh /_ips-entry.sh
+COPY /docker/_protected-entry.sh /_protected-entry.sh
+
+ARG USERNAME
+
+# Delete the existing ubuntu user, its likely using the same ID as the
+# host user so we want to free that up.
+RUN userdel ubuntu #RUN
+
+RUN echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME}

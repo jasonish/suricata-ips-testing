@@ -4,6 +4,16 @@ This repo contains documentation and support scripts to aid in testing
 Suricata IPS modes, with a particular attention on the
 developer. Automated testing strategies are currently not in scope.
 
+The methods are documented below:
+
+- Host Based IPS with NFQ: Applies the IPS to your workstation, but
+  that can make it hard for isolated testing.
+- Distrobox: Convenient; allows for isolating testing; lacks
+  visibility of traffic with tcpdump on both sides of the traffic.
+- MultiContainer: Uses 2 containers, one as the IPS and one as the
+  protected node. Gives you visibility on the network interfaces on
+  both sides of Suricata. See [MultiContainer](./MultiContainer).
+
 ## Host Based IPS with NFQ
 
 This is the simplest way to test Suricata IPS mode but it does have an
