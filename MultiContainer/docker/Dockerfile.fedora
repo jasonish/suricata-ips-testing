@@ -4,12 +4,15 @@ RUN dnf -y update
 
 # Install some basic network tools.
 RUN dnf -y install \
+        bind-utils \
         curl \
         iproute \
         iptables \
         iputils \
+        nmap-ncat \
         tcpdump \
-        telnet
+        telnet \
+        whois
 
 # Install a Suricata development environment.
 RUN dnf -y install \
