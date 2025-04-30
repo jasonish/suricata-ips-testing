@@ -20,6 +20,8 @@ case "${GATEWAY}" in
     *)
 esac
 
+PUBLIC_GATEWAY=$(podman inspect test-ips|jq -r '.[0].NetworkSettings.Networks."ips-public".Gateway')
+
 if podman container exists "${NAME}"; then
     podman exec --interactive --tty "${NAME}" /bin/bash
 else
@@ -30,8 +32,10 @@ else
            -w "${HOME}" \
            --privileged \
            -e "GATEWAY=${GATEWAY}" \
+           -e "PUBLIC_GATEWAY=${PUBLIC_GATEWAY}" \
            --rm \
            --interactive --tty \
+           --detach-keys= \
            --network ips-internal \
            --userns keep-id \
            --cap-add net_raw \
